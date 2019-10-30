@@ -1,0 +1,11 @@
+*.pyc
+*.log
+__pycache__/
+*.sqlite3
+*.egg-info
+build/
+develop-eggs/
+dist/
+eggs/
+.eggs/
+*.gensim*
