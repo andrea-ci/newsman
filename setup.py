@@ -30,6 +30,10 @@ setup(
     url=URL,
     python_requires='>=3.6.0',
     packages=find_packages(),
+    install_requires=[
+        'chardet',
+        'requests'
+    ],
     long_description=LONG_DESC,
     long_description_content_type='text/markdown',
     keywords='press articles text extraction',

@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import re
-import requests
 from threading import Thread
 from .pipe import Pipe
 from newsman.utils.url import Url
 from newsman.scraping import UrlFilter
+import requests
 
 #RE_IMG = re.compile(r'<img (?:.+?) src="(.+?)" (?:.+?)>', re.MULTILINE|re.DOTALL)
 RE_IMG = re.compile(r'<img(?:.*?)src="(.+?)"', re.MULTILINE|re.DOTALL)
