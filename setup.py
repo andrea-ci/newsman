@@ -34,6 +34,9 @@ setup(
         'chardet',
         'requests'
     ],
+    data_files=[
+        ('newsman.d', ['resources/blacklist.txt', 'resources/htmlcodes.json'])
+    ],
     long_description=LONG_DESC,
     long_description_content_type='text/markdown',
     keywords='press articles text extraction',

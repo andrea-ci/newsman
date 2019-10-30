@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import json
 from os import path
+from sys import prefix
 
-RESOURCES_DIR = path.join(path.dirname(path.dirname(path.realpath(__file__))),
-    'resources')
+RESOURCES_DIR = path.join(prefix, 'newsman.d')
 
 def load_charmap():
     """Loads internally stored map of html codes."""
