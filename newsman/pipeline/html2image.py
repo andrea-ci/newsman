@@ -2,7 +2,7 @@
 import re
 from threading import Thread
 from .pipe import Pipe
-from newsman.utils.url import Url
+from newsman.utils import Url
 from newsman.scraping import UrlFilter
 import requests
 
@@ -15,6 +15,7 @@ ACCEPTED_EXTS = ['txt', 'xml', 'json', 'doc', 'docx', 'pdf', 'gif', 'png',
 
 def perform_request(url, results, idx):
     """Performs a HTTP request for getting image size."""
+
     try:
         resp = requests.get(url, timeout=3.5, stream=True)
         results[idx] = resp.headers['Content-Length']
@@ -65,7 +66,6 @@ class Html2image(Pipe):
 
                 try:
                     url = Url(match.group(1))
-                    #url = self.check_url(match.group(1))
                     if urlfilter.validate_domain(url) and urlfilter.validate_content(url):
                         urls.append(url)
                 except ValueError:
@@ -73,21 +73,9 @@ class Html2image(Pipe):
                     pass
 
             img_sizes = self.get_sizes(urls)
-            img_data = [(url.url, img_size) for url, img_size in zip(urls, img_sizes)]
-
-            page.main_image = self.extract_main_image(img_data)
+            page.images = [(url.url, img_size) for url, img_size in zip(urls, img_sizes)]
 
         return page
-
-    def extract_main_image(self, img_data):
-        """Finds image with largest size."""
-
-        if img_data:
-            main_image = max(img_data, key=lambda item:int(item[1]))[0]
-        else:
-            main_image = None
-
-        return main_image
 
     def get_sizes(self, urls):
 

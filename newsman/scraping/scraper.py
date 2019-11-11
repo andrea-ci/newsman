@@ -3,7 +3,7 @@ import re
 from time import time, sleep
 from datetime import datetime
 from .filtering import UrlFilter
-from newsman.utils.url import Url
+from newsman.utils import Url
 from requests.exceptions import RequestException as request_exception
 from requests.packages.urllib3.util.retry import Retry
 from requests.adapters import HTTPAdapter

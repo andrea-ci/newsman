@@ -26,4 +26,5 @@ class Page:
         self.tag_contents = None
         self.title = None
         self.text = None
-        self.main_image = None
+        self.images = None
+        self.metadata = None

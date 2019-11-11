@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """This module provides API for newsman package."""
-from .utils.config import init_config
+from .utils import init_config
 from .news import News
 
 __title__ = 'newsman'
@@ -15,7 +15,7 @@ def read(src, config=None):
     """
 
     if config is None:
-        config = init_config()
+        config = init()
 
     pipes = ['byte2html', 'html2text', 'text2title', 'html2image']
     news = News(config, pipes)

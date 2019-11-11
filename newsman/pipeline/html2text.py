@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import re
 from .pipe import Pipe
+import newsman.utils.decoding as decoder
 
 RE_HEAD = re.compile(r'<head.*?<\/head>', re.MULTILINE|re.DOTALL)
 RE_SCRIPTS = re.compile(r'<script.*?<\/script>', re.MULTILINE|re.DOTALL)
@@ -42,7 +43,6 @@ class Html2text(Pipe):
         self.text_len_thr = config['text_len_thr']
         self.title_len_thr = config['title_len_thr']
         self.hx_len_thr = config['hx_len_thr']
-        self.charmap = config['charmap']
 
     def set_annotations(self, page, **kwargs):
         """ Extracts text fragments from raw html and stores them internally.
@@ -109,7 +109,7 @@ class Html2text(Pipe):
         for match in reg_exp.finditer(html):
 
             content = match.group(1)
-            content = self._decode(content)
+            content = decoder.decode(content)
             content = self._clean_text(content)
 
             # remove spaces for threshold comparison
@@ -141,14 +141,6 @@ class Html2text(Pipe):
         html = html.replace('<br>', '')
 
         return html
-
-    def _decode(self, text):
-        """ Simple HTML-decoding based on replacement. """
-
-        for k, v in self.charmap.items():
-            text = text.replace(k, v)
-
-        return text
 
     def _extract_from_tag(self, regex, html):
         """Extracts text content from inside TAG specified by regex. """

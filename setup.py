@@ -9,7 +9,7 @@ DESCRIPTION = 'A tool for web news scraping.'
 URL = 'https://github.com/acapitanelli/newsman'
 AUTHOR = 'Andrea Capitanelli'
 EMAIL = 'andrea.capitanelli@gmail.com'
-VERSION = '1.0.0'
+VERSION = '1.1.0'
 
 # short/long description
 here = os_path.abspath(os_path.dirname(__file__))
@@ -33,9 +33,6 @@ setup(
     install_requires=[
         'chardet',
         'requests'
-    ],
-    data_files=[
-        ('newsman.d', ['resources/blacklist.txt', 'resources/htmlcodes.json'])
     ],
     long_description=LONG_DESC,
     long_description_content_type='text/markdown',
