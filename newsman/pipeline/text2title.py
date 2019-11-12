@@ -31,11 +31,11 @@ class Text2title(Pipe):
     def extract_title(self, tag_contents):
         """Extracts page title."""
 
-        # priority for TITLE TAG
-        if 'TAG_TITLE' in tag_contents:
-            title = tag_contents['TAG_TITLE'][0]
-        elif 'TAG_H1' in tag_contents:
+        # priority for H1
+        if 'TAG_H1' in tag_contents:
             title = tag_contents['TAG_H1'][0]
+        elif 'TAG_TITLE' in tag_contents:
+            title = tag_contents['TAG_TITLE'][0]
         elif 'TAG_H2' in tag_contents:
             title = tag_contents['TAG_H2'][0]
         elif 'TAG_H3' in tag_contents:
