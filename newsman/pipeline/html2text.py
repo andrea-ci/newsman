@@ -9,7 +9,7 @@ RE_NOSCRIPT = re.compile(r'<noscript>.+?<\/noscript>', re.MULTILINE|re.DOTALL)
 RE_STYLES = re.compile(r'<style.*?<\/style>', re.MULTILINE|re.DOTALL)
 RE_COMMENT = re.compile(r'<!--.*?-->', re.MULTILINE|re.DOTALL)
 RE_TITLE = re.compile(r'<title(?: .+?)?>(.+?)<\/title>', re.MULTILINE|re.DOTALL)
-RE_P = re.compile(r'<p(?: .+?)?>(.+?)<\/p>', re.MULTILINE|re.DOTALL)
+RE_P = re.compile(r'<p.*?>(.+?)<\/p>', re.MULTILINE|re.DOTALL)
 RE_H1 = re.compile(r'<h1.*?>(.+?)<\/h1>', re.MULTILINE|re.DOTALL)
 RE_H2 = re.compile(r'<h2.*?>(.+?)<\/h2>', re.MULTILINE|re.DOTALL)
 RE_H3 = re.compile(r'<h3.*?>(.+?)<\/h3>', re.MULTILINE|re.DOTALL)
@@ -71,7 +71,6 @@ class Html2text(Pipe):
 
             contents_p = self.apply_regex(html, RE_P, self.text_len_thr)
             html = RE_P.sub('', html)
-
             contents_span = self.apply_regex(html, RE_SPAN, self.text_len_thr)
 
             # title data

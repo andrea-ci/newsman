@@ -130,6 +130,7 @@ class Scraper:
                     resp = None
 
                 else:
+
                     # get retrieval timestamp
                     timestamp = self._timestamp()
 
@@ -167,7 +168,7 @@ class Scraper:
             curr_level += 1
             del next_links
 
-    def _extract_links(self, url_obj, html):
+    def _extract_links(self, src_url_obj, html):
         """Extracts valid links from url."""
 
         links = []
@@ -185,9 +186,9 @@ class Scraper:
 
             # workaround for relative links
             if lnk[0:2] == '//':
-                lnk = f'{url_obj.scheme}://{lnk[2:]}'
+                lnk = f'{src_url_obj.scheme}://{lnk[2:]}'
             elif lnk[0] == '/':
-                lnk = f'{url_obj.scheme}://{url_obj.domain}{lnk}'
+                lnk = f'{src_url_obj.scheme}://{src_url_obj.domain}{lnk}'
 
             try:
                 url_obj = Url(lnk)
@@ -201,14 +202,12 @@ class Scraper:
 
     def _timestamp(self):
         """Generates a timestamp for retrieval time. """
-
         return datetime.now()
 
     def set_delay(self, req_times):
         """Adds a delay for next request.
 
-        Delay is evaluated as 1.1 times the mean response time of last 10
-        requests.
+        Delay is evaluated as 1.1 x mean response time of last 10 requests.
         """
 
         req_times = req_times[-10:]
